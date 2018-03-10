@@ -1,6 +1,8 @@
 <img id="image" src="img/on.png">
 <button class="button" onclick="toggleLight();">ON<br>-<br>OFF</button>
-<div class="div" id="timer">5</div>
+<button class="button" onclick="get_number();">SET</button>
+<input type="text" id="input">
+<div class="div" id="timer"></div>
 
 <script>
 var state = true;
@@ -10,17 +12,31 @@ function toggleLight() {
   image.src = state ? "img/on.png" : "img/off.png";
 }
 
-var timeLeft = 5;
-function countDownTimer() {
-  timeLeft = timeLeft - 1;
-  if (timeLeft <= 0) {
-    document.getElementById("image").src = "img/off.png";
-    clearInterval(id);
+function get_number() {
+  var input = document.getElementById("input").value;
+  if (input == "") {
+    alert("內容是空的，發出警告!");
+  } else if (isNaN(input)) {
+    alert("內容不是數字，發出警告!");
   }
-  document.getElementById("timer").innerHTML = timeLeft;
-} 
+    else{
+      //document.getElementById("result").innerHTML = "通過驗證";   
+      timeLeft = document.getElementById("input").value   
+  }
 
-var id = setInterval(countDownTimer, 1000);
+  function countDownTimer() {
+    timeLeft = timeLeft - 1;
+    if (timeLeft <= 0) {
+      document.getElementById("image").src = "img/off.png";
+      clearInterval(id);
+    }
+    document.getElementById("timer").innerHTML = timeLeft;
+  } 
+
+  var id = setInterval(countDownTimer, 1000);
+  }
+
+
 
 </script>
 
